@@ -1,0 +1,32 @@
+
+
+2020-1-8，About GitHub Merge
+关于GitHub合并操作的说明：
+merge 的几种形式
+  A:普通的 merge
+  B:rebase merge
+  C:squash merge
+
+对于普通的 merge，分支上的提交次数会提现到合并之后的主分支上。比如主分支上的提交commit是mu1,mu2,mu3;mu3之后创建了分支branch，分支上的提交是bu1,bu2;
+那么合并到主分支之后的效果是mu1,mu2,mu3,bu1,bu2.
+
+对于squash merge，也就是压缩合并，跟普通合并的区别在于，会将分支上的多次提交压缩成一个提交点合并到主分支上。借用上面的例子，合并之后的结果是mu1,mu2,mu3,buall.
+
+对于rebase merge，其实是重新设置基线，ebase需要基于一个分支来设置你当前的分支的基线，这基线就是当前分支的开始时间轴向后移动到最新的跟踪分支的最后面，这样你的当前分支就是最新的跟踪分支。这里的操作是基于文件事务处理的，所以你不用怕中间失败会影响文件的一致性。在中间的过程中你可以随时取消rebase 事务。
+比如主分支上的提交commit是mu1,mu2,mu3;mu3之后创建了分支branch，分支上的提交是bu1,bu2;在分支准备合并到主分支之前，主分支上已经有新的提交mu4,mu5.这个时候合并branch分支到主分支之后的效果是mu1,mu2,mu3,mu4,mu5,buall.
+
+总结：
+rebase 可以尽可能保持 master 分支干净整洁，并且易于识别 author
+squash 也可以保持 master 分支干净，但是 master 中 author 都是 maintainer，而不是原 owner
+merge 不能保持 master 分支干净，但是保持了所有的 commit history，大多数情况下都是不好的，个别情况挺好
+
+参考：
+作者：曹九朵_
+链接：https://www.jianshu.com/p/4079284dd970
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+作者：liuliqiang
+链接：https://www.jianshu.com/p/684a8ae9dcf1
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
